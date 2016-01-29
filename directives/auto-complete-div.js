@@ -12,8 +12,7 @@
   };
 
   var defaultListFormatter = function(obj, scope) {
-    return '<b>('+obj[scope.valueProperty]+')</b>' +
-      '<span>'+obj[scope.displayProperty]+'</span>';
+    return '<span><i class="bg-stick-icon" style="background-color:'+obj[scope.bgProperty]+';"></i>'+obj[scope.displayProperty]+'</span>';
   };
 
   var addListElements = function(scope, data) {
@@ -301,6 +300,7 @@
           listFormatter: '=',
           pathToData: '@',
           valueProperty: '@',
+          bgProperty: '@',
           displayProperty: '@',
           placeholder: '@',
           prefillFunc: '&',

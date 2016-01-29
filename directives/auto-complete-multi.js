@@ -14,7 +14,7 @@
   var autoCompleteAttrs = [
     'placeholder', 'multiple', 'listFormatter', 'prefillFunc',
     'ngModel', 'valueChanged', 'source', 'pathToData', 'minChars',
-    'defaultStyle', 'valueProperty', 'displayProperty'
+    'defaultStyle', 'valueProperty', 'displayProperty', 'bgProperty'
   ];
 
   // build autocomplet-div tag with input and select
@@ -46,7 +46,7 @@
 
   var buildMultiACDiv = function(attrs) {
     var deleteLink = document.createElement('button');
-    deleteLink.innerHTML = 'x';
+    deleteLink.innerHTML = '&times;';
     deleteLink.className += ' delete';
     deleteLink.setAttribute('ng-click', attrs.ngModel+'.splice($index, 1); $event.stopPropagation()');
 
@@ -56,8 +56,7 @@
     if (attrs.listFormatter) {
       ngRepeatDiv.innerHTML = '<span ng-bind-html="listFormatter(obj)"></span>';
     } else {
-      ngRepeatDiv.innerHTML = '<b>({{obj.'+attrs.valueProperty+'}})</b>'+
-        '<span>{{obj.'+attrs.displayProperty+'}}</span>';
+      ngRepeatDiv.innerHTML = '<span><i class="icon-stick-bg" style="background-color:{{obj.'+attrs.bgProperty+'}}"></i>{{obj.'+attrs.displayProperty+'}}</span>';
     }
     ngRepeatDiv.appendChild(deleteLink);
 
@@ -76,6 +75,7 @@
 
     attrs.valueProperty = attrs.valueProperty || 'id';
     attrs.displayProperty = attrs.displayProperty || 'value';
+    attrs.bgProperty = attrs.bgProperty || 'bg';
     attrs.ngModel = controlEl.getAttribute('ng-model');
     attrs.multiple = true;
 
